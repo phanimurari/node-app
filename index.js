@@ -71,7 +71,7 @@ app.post("/users/", async (request, response) => {
        '${location}'  
       );`;
       await db.run(createUserQuery);
-      res.status(200).json({ success: true });
+      response.status(200).json({ success: true });
     }
   } else {
     response.status(400);
