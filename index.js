@@ -3,7 +3,7 @@ const path = require("path");
 
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 const app = express();
 app.use(express.json());
@@ -12,13 +12,15 @@ const dbPath = path.join(__dirname, "goodreads.db");
 
 let db = null;
 
+const port = process.env.PORT || 3000;
+
 const initializeDBAndServer = async () => {
   try {
     db = await open({
       filename: dbPath,
       driver: sqlite3.Database,
     });
-    app.listen(3000, () => {
+    app.listen(port, () => {
       console.log("Server Running at http://localhost:3000/");
     });
   } catch (e) {
@@ -40,7 +42,6 @@ app.get("/books/", async (request, response) => {
   const booksArray = await db.all(getBooksQuery);
   response.send(booksArray);
 });
-
 
 // User Register API
 app.post("/users/", async (request, response) => {
@@ -74,7 +75,6 @@ app.post("/users/", async (request, response) => {
   }
 });
 
-
 // User Login API
 app.post("/login/", async (request, response) => {
   const { username, password } = request.body;
@@ -100,4 +100,3 @@ app.post("/login/", async (request, response) => {
     }
   }
 });
-
