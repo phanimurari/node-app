@@ -55,7 +55,7 @@ app.post("/users/", async (request, response) => {
       username = '${username}';`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = password;
     console.log(hashedPassword, "hashedPassword");
     if (hashedPassword !== undefined) {
       console.log(hashedPassword, "inside hashed password");
