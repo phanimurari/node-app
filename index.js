@@ -46,7 +46,6 @@ app.get("/books/", async (request, response) => {
 // User Register API
 app.post("/users/", async (request, response) => {
   const { username, name, password, gender, location } = request.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
   const selectUserQuery = `
     SELECT 
       * 
@@ -56,6 +55,7 @@ app.post("/users/", async (request, response) => {
       username = '${username}';`;
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
+    const hashedPassword = await bcrypt.hash(password, 10);
     const createUserQuery = `
      INSERT INTO
       user (username, name, password, gender, location)

@@ -5,12 +5,12 @@ Authorization: Bearer JWT_TOKEN
 
 ###
 
-POST https://node-app-production-95b9.up.railway.app/users
+POST http://localhost:3000/users
 Content-Type: application/json
 
 {   
-    "name":"ravvefweewewqwul",
-    "username":"rahutyl123",
+    "name":"ravvefweewewtrqwul",
+    "username":"rahuerewtyl123",
     "password": "rahul@456",
     "gender": "Male",
     "location":"hyderabad"
