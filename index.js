@@ -56,7 +56,10 @@ app.post("/users/", async (request, response) => {
   const dbUser = await db.get(selectUserQuery);
   if (dbUser === undefined) {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const createUserQuery = `
+    console.log(hashedPassword, "hashedPassword");
+    if (hashedPassword !== undefined) {
+      console.log(hashedPassword, "inside hashed password");
+      const createUserQuery = `
      INSERT INTO
       user (username, name, password, gender, location)
      VALUES
@@ -67,8 +70,9 @@ app.post("/users/", async (request, response) => {
        '${gender}',
        '${location}'  
       );`;
-    await db.run(createUserQuery);
-    response.send("User created successfully");
+      await db.run(createUserQuery);
+      response.send("User created successfully");
+    }
   } else {
     response.status(400);
     response.send("User already exists");
