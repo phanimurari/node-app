@@ -12,6 +12,8 @@ app.use(express.json());
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
+app.use(cors());
+
 const dbPath = path.join(__dirname, "goodreads.db");
 
 let db = null;
