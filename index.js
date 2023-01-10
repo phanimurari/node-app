@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const bp = require("body-parser");
 
 const { open } = require("sqlite");
 const sqlite3 = require("sqlite3");
@@ -8,11 +9,14 @@ const bcrypt = require("bcrypt");
 const app = express();
 app.use(express.json());
 
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
+
 const dbPath = path.join(__dirname, "goodreads.db");
 
 let db = null;
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 const initializeDBAndServer = async () => {
   try {
