@@ -51,7 +51,6 @@ app.get("/books/", async (request, response) => {
 app.post("/users/", async (request, response) => {
   const { username, name, password, gender, location } = request.body;
 
-  console.log(request);
   console.log(request.body);
 
   const selectUserQuery = `
